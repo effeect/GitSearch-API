@@ -15,6 +15,7 @@ app.get("/api/data", (req, res) => {
   res.json({ message: "Data fetched from Express API!" });
 });
 
+app.use("/api/search/repos", require("./routes/api/repos"));
 app.listen(PORT, () => {
   console.log(`Express server running on http://localhost:${PORT}`);
 });
