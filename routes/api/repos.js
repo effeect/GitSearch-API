@@ -34,10 +34,9 @@ async function searchRepos(searchParams) {
     // console.log(queryHandle(repo.query, repo.language));
     const result = await octokitHandle.rest.search.repos({
       q: searchParams.q,
-      per_page: 30,
-      page: 1,
+      per_page: searchParams.per_page || 30,
+      page: searchParams.page || 1,
     });
-    console.log(result);
     return result.data.items;
   } catch (error) {
     console.error("Error in searchRepos:", error.message || error);
