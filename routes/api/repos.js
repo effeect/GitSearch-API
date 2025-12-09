@@ -13,13 +13,10 @@ router.post("/", async (req, res) => {
 
   console.log(searchParams);
 
-  // if (!searchParams || !searchParams.query) {
-  //   return res.status(400).json({ error: "Missing search query parameters." });
-  // }
-
   try {
     const data = await searchRepos(searchParams);
     res.json(data);
+    console.log(data);
   } catch (error) {
     console.error("Error processing search request:", error);
     res
