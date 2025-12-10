@@ -16,6 +16,7 @@ app.get("/api/data", (req, res) => {
 });
 
 app.use("/api/search/repos", require("./routes/api/repos"));
+app.use("/api/search/details", require("./routes/api/details"));
 app.listen(PORT, () => {
   console.log(`Express server running on http://localhost:${PORT}`);
 });

@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
   console.log(searchParams);
 
   try {
-    const data = await searchRepos(searchParams);
+    const data = await GetRepoDetails(searchParams);
     res.json(data);
     console.log(data);
   } catch (error) {
@@ -25,16 +25,13 @@ router.post("/", async (req, res) => {
   }
 });
 
-async function searchRepos(searchParams) {
+async function GetRepoDetails(searchParams) {
   try {
-    console.log(searchParams);
-    // console.log(queryHandle(repo.query, repo.language));
-    console.log(searchParams.q);
-    const result = await octokitHandle.rest.search.repos({
-      q: searchParams.query,
-      per_page: searchParams.per_page || 30,
-      page: searchParams.page || 1,
+    const result = await octokitHandle.rest.repos.get({
+      owner: searchParams.owner,
+      repo: searchParams.repo,
     });
+    // console.log(result);
     return result.data;
   } catch (error) {
     console.error("Error in searchRepos:", error.message || error);
