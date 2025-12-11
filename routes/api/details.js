@@ -19,9 +19,17 @@ router.post("/", async (req, res) => {
     console.log(data);
   } catch (error) {
     console.error("Error processing search request:", error);
-    res
-      .status(500)
-      .json({ error: "Failed to fetch repositories from GitHub." });
+    // Check if it's a known Octokit/HTTP error with a status code
+    const statusCode = error.status || 500;
+    const message =
+      error.message || "Failed to fetch repositories from GitHub.";
+
+    // You can customize the response based on the status code
+    if (statusCode === 404) {
+      res.status(404).json({ error: "Repository not found." });
+    } else {
+      res.status(statusCode).json({ error: message });
+    }
   }
 });
 
@@ -35,6 +43,7 @@ async function GetRepoDetails(searchParams) {
     return result.data;
   } catch (error) {
     console.error("Error in searchRepos:", error.message || error);
+    throw error;
   }
 }
 
