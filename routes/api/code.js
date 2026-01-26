@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
   console.log(searchParams);
 
   try {
-    const data = await searchGithubIssues(searchParams);
+    const data = await searchGithubCode(searchParams);
     res.json(data);
     console.log(data);
   } catch (error) {
