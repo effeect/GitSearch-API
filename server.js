@@ -4,7 +4,7 @@ const cors = require("cors"); // For development, handle CORS
 
 const app = express();
 // MAKE CONFIGURABLE!!!
-const PORT = 5000;
+const PORT = 5001;
 
 // Middleware
 app.use(cors());
@@ -18,6 +18,9 @@ app.get("/api/data", (req, res) => {
 app.use("/api/search/repos", require("./routes/api/repos"));
 app.use("/api/search/details", require("./routes/api/details"));
 app.use("/api/search/commits", require("./routes/api/commits"));
+app.use("/api/search/prs", require("./routes/api/pullrequest"));
+app.use("/api/search/issues", require("./routes/api/pullrequest"));
+app.use("/api/search/code", require("./routes/api/code"));
 
 app.listen(PORT, () => {
   console.log(`Express server running on http://localhost:${PORT}`);
